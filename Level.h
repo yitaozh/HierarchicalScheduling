@@ -11,14 +11,15 @@ using namespace std;
 
 class Level {
 private:
+    static const int DEFAULT_VOLUMN = 10;
     int volumn;
-    int currentTimeStamp;  //current time
     int currentIndex;   //current serving fifo
     vector<Fifo> myFifo;
 
 public:
+    Level();
     Level(int volumn);
-    void push(Packge packge);
+    void push(Package packge);
     void pull();
     int getAvailabeTimeStamp();
 };

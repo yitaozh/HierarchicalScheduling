@@ -12,9 +12,12 @@ using namespace std;
 
 class Scheduler {
 private:
-    vector<Level> level;
+    static const int DEFAULT_VOLUMN = 3;
+    int currentTimeStamp;  //current time
+    vector<Level> levels;
 public:
-    Scheduler();
+    Scheduler(int timeStamp);
+    Scheduler(int volumn, int timeStamp);
     void push(Package package);
     void pull();
 };

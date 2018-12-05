@@ -11,13 +11,19 @@ using namespace std;
 
 class Simulator {
 private:
+    int timeStamp;
     Scheduler* scheduler;
     vector<Flow> flows;
+
 public:
-    Simulator();
-    // TO DO
+    Simulator(vector<Flow> flows);
+    // add flow
+    void addFlow(Flow flow);
+
+    // TODO
     // package generator, feed package into scheduler
-    // TO DO
+
+    // TODO
     // serve package counter, count package from scheduler output
 };
 

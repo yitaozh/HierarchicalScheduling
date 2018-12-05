@@ -7,8 +7,12 @@
 
 
 class Package {
+private:
     int timeStamp;
-    Package(timeStamp);
+    Package(int timeStamp);
+
+public:
+    int getTimeStamp() const;
 };
 
 

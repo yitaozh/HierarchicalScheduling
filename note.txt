@@ -1,0 +1,11 @@
+1. two time unit:
+    Virtual time:   round (one Fifo serve out)
+    Actual time:    cycle (one pkt out)
+2. for every round:
+        Serve the lowest level,
+        pick 1/10 of second level,
+        pick 1/100 of third level
+   for every cycle:
+        pull one pkt
+        push multiple pkt
+3. round and cycle are on the scheduler

@@ -3,3 +3,7 @@
 //
 
 #include "Package.h"
+
+int Package::getTimeStamp() const {
+    return timeStamp;
+}

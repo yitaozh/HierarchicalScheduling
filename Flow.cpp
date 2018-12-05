@@ -4,4 +4,10 @@
 
 #include "Flow.h"
 
-Flow::Flow(int importance, int dataSize): importance(importance), dataSize(dataSize) {}
+Flow::Flow(int weight, int length) {
+
+}
+
+int Flow::getLength() const {
+    return length;
+}
