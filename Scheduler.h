@@ -12,14 +12,17 @@ using namespace std;
 
 class Scheduler {
 private:
-    static const int DEFAULT_VOLUMN = 3;
-    int currentTimeStamp;  //current time
+    static const int DEFAULT_VOLUME = 3;
+    int volume;                     // num of levels in scheduler
+    int currentTimeStamp;           // current time
+    int currentCycle;               // current cycle
     vector<Level> levels;
 public:
-    Scheduler(int timeStamp);
-    Scheduler(int volumn, int timeStamp);
+    Scheduler();
+    explicit Scheduler(int volume);
     void push(Package package);
-    void pull();
+    Package pull();
+    void serveRound();              // one round: one pull, multi push
 };
 
 

@@ -6,16 +6,19 @@
 #define HIERARCHICALSCHEDULING_LIST_H
 
 #include "Package.h"
+#include <vector>
+
+using namespace std;
 
 class Fifo {
 private:
     int index;
-    int volumn;
+    vector<Package> fifo;
 public:
-    Fifo(int index, int volumn);
-    void setVolumn(int volumn);
+    Fifo();
     void push(Package package);
-    void pull();
+    Package pull();
+    bool isEmpty();
 };
 
 

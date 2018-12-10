@@ -9,9 +9,9 @@
 class Package {
 private:
     int timeStamp;
-    Package(int timeStamp);
 
 public:
+    Package(int timeStamp);
     int getTimeStamp() const;
 };
 

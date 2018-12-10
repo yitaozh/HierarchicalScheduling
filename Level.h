@@ -11,16 +11,18 @@ using namespace std;
 
 class Level {
 private:
-    static const int DEFAULT_VOLUMN = 10;
-    int volumn;
-    int currentIndex;   //current serving fifo
-    vector<Fifo> myFifo;
+    static const int DEFAULT_VOLUME = 10;
+    int volume;                         // num of fifos in one level
+    int currentIndex;                   // current serve index
+    vector<Fifo> fifos;
 
 public:
     Level();
-    Level(int volumn);
-    void push(Package packge);
-    void pull();
+    Level(int volume);
+    void push(Package package, int index);
+    Package pull();
+    int getCurrentIndex();
+    void getAndIncrementIndex();
     int getAvailabeTimeStamp();
 };
 
