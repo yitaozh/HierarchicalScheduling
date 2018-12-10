@@ -26,7 +26,7 @@ for flow in input:
 
 output_list = sorted(sorted(reduce(lambda x,y:x+y, \
                     [[[i]+j for j in output[i]] for i in output]), \
-                    key=lambda x:x[0]),key=lambda x:x[2])   # flownum first when departure time same
+                    key=lambda x:x[0]),key=lambda x:x[2])   # flownum first when arrive time same
 
 with open(sys.argv[2], 'w') as f:
     for out in output_list:
