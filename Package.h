@@ -9,6 +9,7 @@
 class Package {
 private:
     int timeStamp;
+    // To Do: need to add the flow this packet packet belongs to, the packet number and the packet length
 
 public:
     Package(int timeStamp);
