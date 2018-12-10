@@ -10,10 +10,12 @@ with open(sys.argv[1], 'r') as f:
         eles = line.split()
         input[eles[0]] = eles[1:]      # input: python trace_generator.py input.txt output.txt
 
-for flow in input:
-    weight = float(input[flow][0])
+
+weight = float(input[flow][0])
     flow_length, arr_rand, size = tuple(map(int,input[flow][1:]))
     dep_adder = math.ceil(size/weight)   # int 1/weight ?
+    
+for flow in input:
     output[flow] = [[] for i in range(flow_length)]   # initial list
     output[flow][0] = [0, dep_adder, size]   #  first packet is special
     for i in range(1, flow_length):
@@ -22,6 +24,10 @@ for flow in input:
                                 if output[flow][i][0] > output[flow][i-1][1] \
                                 else output[flow][i-1][1]) + dep_adder)     # departure time
         output[flow][i].append(size)  # size
+weight = float(input[flow][0])
+weight = float(input[flow][0])
+weight = float(input[flow][0])
+
 
 output_list = sorted(sorted(reduce(lambda x,y:x+y, \
                     [[[i]+j for j in output[i]] for i in output]), \
