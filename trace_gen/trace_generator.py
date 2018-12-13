@@ -13,7 +13,7 @@ with open(sys.argv[1], 'r') as f:
 for flow in input:
     weight = float(input[flow][0])
     flow_length, arr_rand, size = tuple(map(int,input[flow][1:]))
-    dep_adder = math.ceil(size/weight)   # int 1/weight ?
+    dep_adder = int(math.ceil(size/weight))   # int 1/weight ?
     output[flow] = [[] for i in range(flow_length)]   # initial list
     output[flow][0] = [0, 0, dep_adder, size]   #  first packet is special
     for i in range(1, flow_length):
