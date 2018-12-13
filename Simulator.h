@@ -7,21 +7,17 @@
 
 #include "Scheduler.h"
 #include "Flow.h"
+#include "Utility.h"
 using namespace std;
 
 class Simulator {
 private:
     int timeStamp;
-    Scheduler* scheduler;
-    vector<Flow> flows;
+    Scheduler scheduler;
+    vector<Package> packages;
 
 public:
-    Simulator(vector<Flow> flows);
-    // add flow
-    void addFlow(Flow flow);
-
-    // TODO
-    // package generator, feed package into scheduler
+    Simulator();
 
     // TODO
     // serve package counter, count package from scheduler output

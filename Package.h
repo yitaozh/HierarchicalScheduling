@@ -8,12 +8,16 @@
 
 class Package {
 private:
-    int timeStamp;
-    // To Do: need to add the flow this packet packet belongs to, the packet number and the packet length
+    int flowNum;            //Identify flow
+    int packageNum;         //Packet number in flow
+    int arriveTime;
+    int departureTime;
+    int size;
+public:
+    int getDepartureTime() const;
 
 public:
-    Package(int timeStamp);
-    int getTimeStamp() const;
+    Package(int flowNum, int packageNum, int arriveTime, int departureTime, int size);
 };
 
 

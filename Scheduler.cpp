@@ -18,7 +18,7 @@ Scheduler::Scheduler(int volume) {
 }
 
 void Scheduler::push(Package package) {
-    int timeStamp = package.getTimeStamp();
+    int timeStamp = package.getDepartureTime();
     timeStamp = max(timeStamp, currentTimeStamp);
     if (timeStamp - currentTimeStamp >= 100)
         levels[0].push(package, timeStamp / 100);
@@ -28,7 +28,7 @@ void Scheduler::push(Package package) {
 }
 
 void Scheduler::serveRound() {
-    while (pull().getTimeStamp() != -1) {
+    while (pull().getDepartureTime() != -1) {
         // TODO
         // push package
     }
