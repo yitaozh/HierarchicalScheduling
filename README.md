@@ -17,7 +17,10 @@
 
 
 ### Output: trace.txt
+#### [Total Packet]
 #### [Flow Num][Packet Num][Arrival Time][Departure time] [Packet Size]
+
+- Total Packet: Total Num of Packets from input config
 
 - Flow Num: Same as ‘Flow Num’ in input file
 
