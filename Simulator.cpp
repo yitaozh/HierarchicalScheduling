@@ -8,6 +8,13 @@ using namespace std;
 
 Simulator::Simulator() {
     readFile(packages);
-    for (auto package: packages)
-        scheduler.push(package);
+    timeStamp = 0;
+    currentPacketIndex = 0;
+}
+
+void Simulator::run() {
+    while (packages[currentPacketIndex].getDepartureTime() == timeStamp)
+        scheduler.push(packages[currentPacketIndex++]);
+    scheduler.serveRound();
+    timeStamp++;
 }

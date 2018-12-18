@@ -15,12 +15,12 @@ private:
     int timeStamp;
     Scheduler scheduler;
     vector<Package> packages;
+    int currentPacketIndex;
 
 public:
     Simulator();
-
-    // TODO
     // serve package counter, count package from scheduler output
+    void run();
 };
 
 

@@ -22,7 +22,7 @@ public:
     explicit Scheduler(int volume);
     void push(Package package);
     Package pull();
-    void serveRound();              // one round: one pull, multi push
+    int serveRound();              // one round: one pull, multi push
 };
 
 
