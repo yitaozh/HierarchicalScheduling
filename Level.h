@@ -19,8 +19,8 @@ private:
 public:
     Level();
     Level(int volume);
-    void push(Package package, int index);
-    Package pull();
+    void push(Packet package, int index);
+    Packet pull();
     int getCurrentIndex();
     void getAndIncrementIndex();
     int getAvailabeTimeStamp();

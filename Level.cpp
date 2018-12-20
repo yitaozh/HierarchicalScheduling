@@ -17,11 +17,11 @@ Level::Level(int volume) {
     }
 }
 
-void Level::push(Package package, int index) {
+void Level::push(Packet package, int index) {
     fifos[index].push(package);
 }
 
-Package Level::pull() {
+Packet Level::pull() {
     return  fifos[currentIndex].pull();
 }
 

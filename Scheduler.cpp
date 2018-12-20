@@ -17,8 +17,8 @@ Scheduler::Scheduler(int volume) {
     }
 }
 
-void Scheduler::push(Package package) {
-    int timeStamp = package.getDepartureTime();
+void Scheduler::push(Packet package) {
+    int timeStamp = package.getDepartureRound();
     timeStamp = max(timeStamp, currentTimeStamp);
     if (timeStamp - currentTimeStamp >= 100)
         levels[2].push(package, timeStamp / 100);
@@ -27,8 +27,10 @@ void Scheduler::push(Package package) {
     else levels[0].push(package, timeStamp % 10);
 }
 
-int Scheduler::serveRound() {
-    while (pull().getDepartureTime() != -1) {
+vector<Packet> Scheduler::serveRound() {
+    vector<Packet> result;
+    // fake package mark the end with departureTime -1
+    while (pull().getDepartureRound() != -1) {
 
     }
     levels[0].getAndIncrementIndex();
@@ -37,10 +39,11 @@ int Scheduler::serveRound() {
         if (levels[1].getCurrentIndex() == 0)
             levels[2].getAndIncrementIndex();
     }
-    return currentTimeStamp++;
+    currentTimeStamp++;
+    return result;
 }
 
-Package Scheduler::pull() {
+Packet Scheduler::pull() {
     currentCycle++;
     return levels[0].pull();
 }

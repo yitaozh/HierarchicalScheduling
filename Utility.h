@@ -5,10 +5,11 @@
 #ifndef HIERARCHICALSCHEDULING_UTILITY_H
 #define HIERARCHICALSCHEDULING_UTILITY_H
 
-#include "Package.h"
+#include "Packet.h"
+#include "Flow.h"
 #include <vector>
 using namespace std;
 
-void readFile(vector<Package> &);
+void readFile(vector<Flow>&, vector<Packet> &);
 
 #endif //HIERARCHICALSCHEDULING_UTILITY_H

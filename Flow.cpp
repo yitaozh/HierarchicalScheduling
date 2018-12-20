@@ -4,10 +4,24 @@
 
 #include "Flow.h"
 
-Flow::Flow(int weight, int length) {
-
+Flow::Flow(int id, float weight) {
+    lastDepartureRound = 0;
+    this->flowId = id;
+    this->weight = weight;
 }
 
-int Flow::getLength() const {
-    return length;
+int Flow::getLastDepartureRound() const {
+    return lastDepartureRound;
+}
+
+void Flow::setLastDepartureRound(int lastDepartureRound) {
+    Flow::lastDepartureRound = lastDepartureRound;
+}
+
+float Flow::getWeight() const {
+    return weight;
+}
+
+void Flow::setWeight(float weight) {
+    Flow::weight = weight;
 }

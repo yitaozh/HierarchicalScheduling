@@ -13,12 +13,15 @@ using namespace std;
 class Simulator {
 private:
     int timeStamp;
+    int currentCycle;
     Scheduler scheduler;
-    vector<Package> packages;
+    vector<Flow> flows;
+    vector<Packet> packages;
     int currentPacketIndex;
 
 public:
     Simulator();
+    int calDepartureRound(int, int);
     // serve package counter, count package from scheduler output
     void run();
 };

@@ -5,7 +5,7 @@
 #ifndef HIERARCHICALSCHEDULING_LIST_H
 #define HIERARCHICALSCHEDULING_LIST_H
 
-#include "Package.h"
+#include "Packet.h"
 #include <vector>
 
 using namespace std;
@@ -13,11 +13,11 @@ using namespace std;
 class Fifo {
 private:
     int index;
-    vector<Package> fifo;
+    vector<Packet> fifo;
 public:
     Fifo();
-    void push(Package package);
-    Package pull();
+    void push(Packet package);
+    Packet pull();
     bool isEmpty();
 };
 

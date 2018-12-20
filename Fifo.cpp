@@ -9,15 +9,15 @@ Fifo::Fifo() {
 }
 
 
-void Fifo::push(Package package) {
+void Fifo::push(Packet package) {
     fifo.push_back(package);
 }
 
-Package Fifo::pull() {
+Packet Fifo::pull() {
     if (index < fifo.size())
         return fifo[index++];
     else {
-        Package tmp(-1);
+        Packet tmp(-1);
         return tmp;
     }
 }

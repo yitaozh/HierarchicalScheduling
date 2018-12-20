@@ -7,23 +7,23 @@
 
 // will be used in package-send function
 #include <queue>
-#include "Package.h"
+#include "Packet.h"
 using namespace std;
 
 class Flow {
 private:
-    int weight;
-    int length;     // How many package in total
-    queue<Package> packages;
-
+    int flowId;
+    float weight;
+    int lastDepartureRound;
 public:
-    Flow(int weight, int length);
+    Flow(int id, float weight);
 
-    int getWeight() const;
-    int getLength() const;
-    void setWeight(int weight);
-    void setLength(int length);
-    Package getNextPackage();
+    float getWeight() const;
+
+    int getLastDepartureRound() const;
+    void setLastDepartureRound(int lastDepartureRound);
+
+    void setWeight(float weight);
 };
 
 

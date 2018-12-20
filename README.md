@@ -31,8 +31,8 @@
 
 - Departure time: 
 ```
-Max(Current Packet Arrival Time, Last Packet Departure time) + (1/Weight) * Packet size  
-(first pack departure time set to (1/Weight) * Packet size)    
+Max(Current Packet Arrival Round, Last Packet Departure Round of the corresponding flow) + (1 / Weight) * Packet size  
+(first pack departure time set to (1 / Weight) * Packet size)    
 ```
 
 - Packet Size: Same as Input Packet Size, set to 1 now

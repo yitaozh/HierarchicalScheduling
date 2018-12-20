@@ -20,9 +20,9 @@ private:
 public:
     Scheduler();
     explicit Scheduler(int volume);
-    void push(Package package);
-    Package pull();
-    int serveRound();              // one round: one pull, multi push
+    void push(Packet package);
+    Packet pull();
+    vector<Packet> serveRound();              // one round: one pull, multi push
 };
 
 
