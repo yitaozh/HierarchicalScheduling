@@ -14,7 +14,7 @@ class Scheduler {
 private:
     static const int DEFAULT_VOLUME = 3;
     int volume;                     // num of levels in scheduler
-    int currentTimeStamp;           // current time
+    int currentRound;           // current time
     int currentCycle;               // current cycle
     Level levels[3];
 public:
@@ -22,6 +22,8 @@ public:
     explicit Scheduler(int volume);
     void push(Packet packet);
     Packet serveCycle();
+
+    void setCurrentRound(int currentRound);
 };
 
 

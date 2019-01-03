@@ -5,11 +5,7 @@
 #include "Level.h"
 
 Level::Level() {
-    Level(10);
-}
-
-Level::Level(int volume) {
-    this->volume = volume;
+    this->volume = 10;
     this->currentIndex = 0;
 }
 

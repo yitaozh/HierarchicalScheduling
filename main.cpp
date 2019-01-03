@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "Level.h"
 #include "Simulator.h"
@@ -8,16 +9,29 @@ using namespace std;
 int main() {
     Simulator simulator;
 
-    Packet tmp(-1, -1, -1, -1, -1);
+    ofstream outputFile;
 
-    Fifo fifo;
-    fifo.push(tmp);
+    outputFile << "Packet Num: " << simulator.packets.size() << endl;
 
-    for (int i = 1; i <= 10; i++) {
-        Packet packet = simulator.runCycle();
-        cout << i << "th packet:" << packet.getPacketOrder() << endl;
+    /*
+    for (auto packet: simulator.packets) {
+        cout << "FlowNum: " << packet.getFlowId() << " packetNum: " << packet.getPacketOrder() << endl;
     }
+    */
 
+    string filename = "schedulingResult.txt";
+
+    outputFile.open(filename);
+
+    for (int i = 0; i < 100; i++) {
+        vector<Packet> packets = simulator.runRound();
+        if (packets.empty()) continue;
+        outputFile << "Round " << i << endl;
+        for (auto packet: packets) {
+            outputFile << "FlowNum: " << packet.getFlowId();
+            outputFile << " packetNum: " << packet.getPacketOrder() << endl;
+        }
+    }
 
     return 0;
 }

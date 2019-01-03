@@ -6,7 +6,7 @@
 #include "Utility.h"
 using namespace std;
 
-void readFile(vector<Flow>& flows, vector<Packet>& packages) {
+void readFile(vector<Flow>& flows, vector<Packet>& packets) {
     ifstream inputFile;
     string filename;
     int numOfFlows;
@@ -32,8 +32,8 @@ void readFile(vector<Flow>& flows, vector<Packet>& packages) {
         inputFile >> flowId;
         inputFile >> flowWeight;
 
-        Flow tmp(flowId, flowWeight);
-        flows.push_back(tmp);
+        Flow flow(flowId - 1, flowWeight);
+        flows.push_back(flow);
     }
 
     inputFile >> numOfPackage;
@@ -44,8 +44,8 @@ void readFile(vector<Flow>& flows, vector<Packet>& packages) {
         inputFile >> packageNum;
         inputFile >> arriveCycle;
         inputFile >> size;
-        Packet tmp(flowNum, packageNum, arriveCycle, 0, size);
-        packages.push_back(tmp);
+        Packet packet(flowNum, packageNum, arriveCycle, 0, size);
+        packets.push_back(packet);
     }
 
     inputFile.close();

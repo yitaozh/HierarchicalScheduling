@@ -17,7 +17,6 @@ private:
     Fifo fifos[10];
 public:
     Level();
-    Level(int volume);
     void push(Packet packet, int index);
     Packet pull();
     int getCurrentIndex();

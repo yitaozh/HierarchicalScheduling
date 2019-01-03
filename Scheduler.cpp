@@ -8,19 +8,24 @@ Scheduler::Scheduler() {
     Scheduler(3);
 }
 
+void Scheduler::setCurrentRound(int currentRound) {
+    Scheduler::currentRound = currentRound;
+}
+
 Scheduler::Scheduler(int volume) {
     this->volume = volume;
-    currentTimeStamp = 0;
+    currentRound = 0;
+    currentCycle = 0;
 }
 
 void Scheduler::push(Packet packet) {
-    int timeStamp = packet.getDepartureRound();
-    timeStamp = max(timeStamp, currentTimeStamp);
-    if (timeStamp - currentTimeStamp >= 100)
-        levels[2].push(packet, timeStamp / 100);
-    else if (timeStamp - currentTimeStamp >= 10)
-        levels[1].push(packet, timeStamp / 10 % 10);
-    else levels[0].push(packet, timeStamp % 10);
+    int departureRound = packet.getDepartureRound();
+    departureRound = max(departureRound, currentRound);
+    if (departureRound - currentRound >= 100)
+        levels[2].push(packet, departureRound / 100);
+    else if (departureRound - currentRound >= 10)
+        levels[1].push(packet, departureRound / 10 % 10);
+    else levels[0].push(packet, departureRound % 10);
 }
 
 Packet Scheduler::serveCycle() {
@@ -31,6 +36,7 @@ Packet Scheduler::serveCycle() {
 
         if (levels[0].getCurrentIndex() == 0) {
             levels[1].getAndIncrementIndex();
+
             if (levels[1].getCurrentIndex() == 0)
                 levels[2].getAndIncrementIndex();
         }

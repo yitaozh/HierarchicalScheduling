@@ -9,25 +9,38 @@
 using namespace std;
 
 Simulator::Simulator() {
-    readFile(flows, packages);
-    timeStamp = 0;
+    readFile(flows, packets);
+    currentRound = 0;
+    currentCycle = 0;
     currentPacketIndex = 0;
 }
 
-Packet Simulator::runCycle() {
-    while (packages[currentPacketIndex].getArriveCycle() == timeStamp) {
-        Packet package = packages[currentPacketIndex];
-        int tmp = calDepartureRound(package.getFlowId(), package.getSize());
-        packages[currentPacketIndex].setDepartureRound(tmp);
-        scheduler.push(packages[currentPacketIndex++]);
+vector<Packet> Simulator::runRound() {
+    vector<Packet> result;
+    Packet tmp = runCycle();
+    while (tmp.getPacketOrder() != -1) {
+        result.push_back(tmp);
+        tmp = runCycle();
     }
-    timeStamp++;
+    currentRound++;
+    scheduler.setCurrentRound(currentRound);
+    return result;
+}
+
+Packet Simulator::runCycle() {
+    while (packets[currentPacketIndex].getArriveCycle() == currentCycle) {
+        Packet packet = packets[currentPacketIndex++];
+        int tmp = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
+        packet.setDepartureRound(tmp);
+        scheduler.push(packet);
+    }
+    currentCycle++;
     return scheduler.serveCycle();
 }
 
-int Simulator::calDepartureRound(int flowId, int packageSize) {
-    int departureRound = round(max(timeStamp, flows[flowId].getLastDepartureRound())
-            + 1 / flows[flowId].getWeight() * packageSize);
+int Simulator::calDepartureRound(int flowId, int packetSize) {
+    int departureRound = round(max(currentRound, flows[flowId].getLastDepartureRound())
+            + 1 / flows[flowId].getWeight() * packetSize);
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }
