@@ -17,7 +17,7 @@ Packet Fifo::pull() {
     if (index < fifo.size())
         return fifo[index++];
     else {
-        Packet tmp(-1);
+        Packet tmp(-1, -1, -1, -1, -1);
         return tmp;
     }
 }

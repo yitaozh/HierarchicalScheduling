@@ -4,6 +4,7 @@
 //
 
 #include "Simulator.h"
+#include <cmath>
 
 using namespace std;
 
@@ -13,20 +14,20 @@ Simulator::Simulator() {
     currentPacketIndex = 0;
 }
 
-void Simulator::run() {
+Packet Simulator::runCycle() {
     while (packages[currentPacketIndex].getArriveCycle() == timeStamp) {
         Packet package = packages[currentPacketIndex];
         int tmp = calDepartureRound(package.getFlowId(), package.getSize());
         packages[currentPacketIndex].setDepartureRound(tmp);
         scheduler.push(packages[currentPacketIndex++]);
     }
-    scheduler.serveRound();
     timeStamp++;
+    return scheduler.serveCycle();
 }
 
 int Simulator::calDepartureRound(int flowId, int packageSize) {
-    int departureRound = static_cast<int>(max(timeStamp, flows[flowId].getLastDepartureRound())
-                                          + 1 / flows[flowId].getWeight() * packageSize);
+    int departureRound = round(max(timeStamp, flows[flowId].getLastDepartureRound())
+            + 1 / flows[flowId].getWeight() * packageSize);
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }

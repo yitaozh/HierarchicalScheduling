@@ -32,3 +32,6 @@ int Packet::getSize() const {
     return size;
 }
 
+int Packet::getPacketOrder() const {
+    return packetOrder;
+}

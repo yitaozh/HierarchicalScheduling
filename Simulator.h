@@ -23,7 +23,7 @@ public:
     Simulator();
     int calDepartureRound(int, int);
     // serve package counter, count package from scheduler output
-    void run();
+    Packet runCycle();
 };
 
 

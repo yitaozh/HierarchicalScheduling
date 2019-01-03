@@ -5,20 +5,16 @@
 #include "Level.h"
 
 Level::Level() {
-    Level(DEFAULT_VOLUME);
+    Level(10);
 }
 
 Level::Level(int volume) {
     this->volume = volume;
     this->currentIndex = 0;
-    for (int i = 0; i < volume; i++) {
-        Fifo tmp;
-        fifos.push_back(tmp);
-    }
 }
 
-void Level::push(Packet package, int index) {
-    fifos[index].push(package);
+void Level::push(Packet packet, int index) {
+    fifos[index].push(packet);
 }
 
 Packet Level::pull() {

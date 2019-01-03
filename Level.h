@@ -14,12 +14,11 @@ private:
     static const int DEFAULT_VOLUME = 10;
     int volume;                         // num of fifos in one level
     int currentIndex;                   // current serve index
-    vector<Fifo> fifos;
-
+    Fifo fifos[10];
 public:
     Level();
     Level(int volume);
-    void push(Packet package, int index);
+    void push(Packet packet, int index);
     Packet pull();
     int getCurrentIndex();
     void getAndIncrementIndex();

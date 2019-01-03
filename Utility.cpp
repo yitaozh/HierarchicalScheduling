@@ -11,11 +11,14 @@ void readFile(vector<Flow>& flows, vector<Packet>& packages) {
     string filename;
     int numOfFlows;
     int numOfPackage;
+
+    /*
     cout << "Please enter the filename, press ENTER to use result.txt directly" << endl;
 
     getline(cin, filename);
     if (filename.empty())
-        filename = "result.txt";
+    */
+    filename = "result_new.txt";
 
     inputFile.open(filename);
     if (!inputFile) {

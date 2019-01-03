@@ -16,13 +16,12 @@ private:
     int volume;                     // num of levels in scheduler
     int currentTimeStamp;           // current time
     int currentCycle;               // current cycle
-    vector<Level> levels;
+    Level levels[3];
 public:
     Scheduler();
     explicit Scheduler(int volume);
-    void push(Packet package);
-    Packet pull();
-    vector<Packet> serveRound();              // one round: one pull, multi push
+    void push(Packet packet);
+    Packet serveCycle();
 };
 
 

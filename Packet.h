@@ -26,6 +26,8 @@ public:
     int getFlowId() const;
 
     int getSize() const;
+
+    int getPacketOrder() const;
 };
 
 
