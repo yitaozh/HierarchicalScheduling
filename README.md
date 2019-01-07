@@ -5,11 +5,11 @@
 
 
 #### for union random trace_generator.py
-#### [Flow Num] [Weight] [Flow Length] [Arrival Randomness] [Packet Size]
+#### [Flow Id] [Flow Weight] [Flow Length] [Arrival Randomness] [Packet Size]
 
-- Flow Num: Identify flow
+- Flow Id: Identify flow order from input config
 
-- Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
+- Flow Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
 
 - Flow Length: Packet number in flow
 
@@ -20,11 +20,11 @@
 
 
 #### for possion random trace_generator.py
-#### [Flow Num] [Weight] [Flow Length] [Possion lamba] [Exp lamba] [Packet Size]
+#### [Flow Id] [Flow Weight] [Flow Length] [Possion lamba] [Exp lamba] [Packet Size]
 
-- Flow Num: Identify flow
+- Flow Id: Identify flow order from input config
 
-- Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
+- Flow Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
 
 - Flow Length: Packet number in flow
 
@@ -39,21 +39,21 @@
 ### Output: trace.txt
 
 #### [Total Flow]
-#### [Flow Id] [Flow weight]
+#### [Flow Id] [Flow Weight]
 #### [Total Packet]
-#### [flowId] [Packet Order] [Arrive Cycle] [Packet Size]
+#### [flow Id] [Packet Order] [Arrive Cycle] [Packet Size]
 
 - Total Flow : Total Num of Flows from input config
 
 - Flow Id: Identify flow order from input config 
 
-- Flow weight: Calculate departure time 
+- Flow Weight: Calculate departure time 
 
 - Total Packet: Total Num of Packets from input config
 
-- PacketOrder: Identify packet order in the same flow 
+- Packet Order: Identify packet order in the same flow 
 
-- ArriveCycle: Current Packet Arrival Time = last Packet Arrival Time + Random.union/exp
+- Arrive Cycle: Current Packet Arrival Time = last Packet Arrival Time + Random.union/exp
 (first pack arrival time set to 0 or possion) 
 
 - Packet Size: Packet size in flow, set to 1 now
@@ -61,7 +61,7 @@
 
 
 
-- For calculate departure time:
+For calculate departure time:
 ```
 Max(Current Packet Arrival Round, Last Packet Departure Round of the corresponding flow) + (1 / Weight) * Packet size  
 (first pack departure time set to (1 / Weight) * Packet size)    
