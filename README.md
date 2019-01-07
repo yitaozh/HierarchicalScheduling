@@ -32,21 +32,35 @@
 
 
 
-
+10 // num of flows
+[flow flowId] [flow weight]
+...
+153
+[flowId] [packetOrder] [arriveCycle] [packetSize]
+1 0 0 1
+2 0 0 1
+3 0 0 1
 ### Output: trace.txt
+
+#### [Total Flow]
+#### [Flow Id] [Flow weight]
 #### [Total Packet]
-#### [Flow Num][Packet Num][Arrival Time][Departure time] [Packet Size]
+#### [flowId] [Packet Order] [Arrive Cycle] [Packet Size]
+
+- Total Flow : Total Num of Flows from input config
+
+- Flow Id: Identify flow order from input config 
+
+- Flow weight:
 
 - Total Packet: Total Num of Packets from input config
 
-- Flow Num: Same as ‘Flow Num’ in input file
+- PacketOrder: Identify packet order in the same flow 
 
-- Packet Num: Identify packet order in the same flow 
-
-- Arrival Time: Current Packet Arrival Time = last Packet Arrival Time + Random(0, Arrival Randomness)
+- ArriveCycle: Current Packet Arrival Time = last Packet Arrival Time + Random(0, Arrival Randomness)
 (first pack arrival time set to 0) 
 
-- Departure time: 
+- Packet Size: Packet size in flow, set to 1 now
 ```
 Max(Current Packet Arrival Round, Last Packet Departure Round of the corresponding flow) + (1 / Weight) * Packet size  
 (first pack departure time set to (1 / Weight) * Packet size)    
