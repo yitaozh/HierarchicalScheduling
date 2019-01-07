@@ -4,21 +4,21 @@
 
 #include "Level.h"
 
-Level::Level() {
-    this->volume = 10;
-    this->currentIndex = 0;
+Level::Level(): volume(10), currentIndex(0) {
 }
 
 void Level::push(Packet packet, int index) {
-    fifos[index].push(packet);
+    fifos[index].push_back(packet);
 }
 
 Packet Level::pull() {
-    return  fifos[currentIndex].pull();
-}
-
-int Level::getAvailabeTimeStamp() {
-
+    if (isCurrentFifoEmpty()) {
+        Packet tmp(-1, -1, -1, -1, -1, -1);
+        return tmp;
+    }
+    Packet tmp = fifos[currentIndex].front();
+    fifos[currentIndex].pop_front();
+    return tmp;
 }
 
 int Level::getCurrentIndex() {
@@ -31,4 +31,12 @@ void Level::getAndIncrementIndex() {
     } else {
         currentIndex = 0;
     }
+}
+
+bool Level::isCurrentFifoEmpty() {
+    return fifos[currentIndex].empty();
+}
+
+int Level::getCurrentFifoSize() {
+    return static_cast<int>(fifos[currentIndex].size());
 }

@@ -5,8 +5,8 @@
 #ifndef HIERARCHICALSCHEDULING_HIERARCHY_H
 #define HIERARCHICALSCHEDULING_HIERARCHY_H
 
-#include "Fifo.h"
-#include <vector>
+#include <deque>
+#include "Packet.h"
 using namespace std;
 
 class Level {
@@ -14,14 +14,15 @@ private:
     static const int DEFAULT_VOLUME = 10;
     int volume;                         // num of fifos in one level
     int currentIndex;                   // current serve index
-    Fifo fifos[10];
+    deque<Packet> fifos[10];
 public:
     Level();
     void push(Packet packet, int index);
     Packet pull();
     int getCurrentIndex();
     void getAndIncrementIndex();
-    int getAvailabeTimeStamp();
+    int getCurrentFifoSize();
+    bool isCurrentFifoEmpty();
 };
 
 

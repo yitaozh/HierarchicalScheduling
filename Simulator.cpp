@@ -19,28 +19,42 @@ vector<Packet> Simulator::runRound() {
     vector<Packet> result;
     Packet tmp = runCycle();
     while (tmp.getPacketOrder() != -1) {
+        currentCycle++;
+        tmp.setDepartureCycle(currentCycle);
         result.push_back(tmp);
         tmp = runCycle();
     }
+
+    //serve the level1 and level2 fifo
+    vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle);
+
+
+    result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
+    //current round done
     currentRound++;
     scheduler.setCurrentRound(currentRound);
     return result;
 }
 
 Packet Simulator::runCycle() {
-    while (packets[currentPacketIndex].getArriveCycle() == currentCycle) {
+    //push arrive packets to scheduler
+    while (currentPacketIndex <=packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
         Packet packet = packets[currentPacketIndex++];
-        int tmp = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
-        packet.setDepartureRound(tmp);
+        int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
+        packet.setDepartureRound(departureRound);
         scheduler.push(packet);
     }
-    currentCycle++;
+    //pull one packet out
     return scheduler.serveCycle();
 }
 
+int Simulator::numOfPackets() {
+    return static_cast<int>(packets.size());
+}
+
 int Simulator::calDepartureRound(int flowId, int packetSize) {
-    int departureRound = round(max(currentRound, flows[flowId].getLastDepartureRound())
-            + 1 / flows[flowId].getWeight() * packetSize);
+    int departureRound = static_cast<int>(ceil(max(currentRound, flows[flowId].getLastDepartureRound())
+            + 1 / flows[flowId].getWeight() * packetSize));
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }

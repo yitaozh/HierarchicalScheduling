@@ -44,7 +44,7 @@ void readFile(vector<Flow>& flows, vector<Packet>& packets) {
         inputFile >> packageNum;
         inputFile >> arriveCycle;
         inputFile >> size;
-        Packet packet(flowNum, packageNum, arriveCycle, 0, size);
+        Packet packet(flowNum, packageNum, arriveCycle, -1, -1, size);
         packets.push_back(packet);
     }
 

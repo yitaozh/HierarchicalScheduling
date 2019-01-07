@@ -16,16 +16,16 @@ private:
     int currentCycle;
     Scheduler scheduler;
     vector<Flow> flows;
+    vector<Packet> packets;
     int currentPacketIndex;
 
 public:
-    vector<Packet> packets;
-
     Simulator();
     int calDepartureRound(int, int);
     vector<Packet> runRound();
     // serve package counter, count package from scheduler output
     Packet runCycle();
+    int numOfPackets();
 };
 
 

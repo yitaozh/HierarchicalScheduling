@@ -11,7 +11,7 @@ int main() {
 
     ofstream outputFile;
 
-    outputFile << "Packet Num: " << simulator.packets.size() << endl;
+    outputFile << "Packet Num: " << simulator.numOfPackets() << endl;
 
     /*
     for (auto packet: simulator.packets) {
@@ -23,13 +23,17 @@ int main() {
 
     outputFile.open(filename);
 
-    for (int i = 0; i < 100; i++) {
+    for (int cycle = 0, num = 0; num < simulator.numOfPackets(); cycle++) {
         vector<Packet> packets = simulator.runRound();
         if (packets.empty()) continue;
-        outputFile << "Round " << i << endl;
+        outputFile << "Round " << cycle << endl;
         for (auto packet: packets) {
+            num++;
             outputFile << "FlowNum: " << packet.getFlowId();
-            outputFile << " packetNum: " << packet.getPacketOrder() << endl;
+            outputFile << " packetNum: " << packet.getPacketOrder();
+            outputFile << " serve Cycle: " << packet.getDepartureCycle();
+            // outputFile << " arrive Cycle: "<< packet.getArriveCycle();
+            outputFile << endl;
         }
     }
 

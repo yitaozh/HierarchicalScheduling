@@ -12,16 +12,22 @@ private:
     int packetOrder;         //Packet number in flow
     int arriveCycle;
     int departureRound;
+    int departureCycle;
     int size;
 
 public:
+    Packet(int flowNum, int packageNum, int arriveCycle,
+            int departureRound, int departureCycle, int size);
+
     int getDepartureRound() const;
 
     int getArriveCycle() const;
 
-    void setDepartureRound(int departureRound);
+    int getDepartureCycle() const;
 
-    Packet(int flowNum, int packageNum, int arriveCycle, int departureRound, int size);
+    void setDepartureCycle(int departureCycle);
+
+    void setDepartureRound(int departureRound);
 
     int getFlowId() const;
 

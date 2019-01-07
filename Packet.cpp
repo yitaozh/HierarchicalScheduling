@@ -4,11 +4,13 @@
 
 #include "Packet.h"
 
-Packet::Packet(int flowNum, int packageNum, int arriveCycle, int departureRound, int size){
+Packet::Packet(int flowNum, int packageNum, int arriveCycle,
+        int departureRound, int departureCycle, int size){
     this->flowId = flowNum;
     this->packetOrder = packageNum;
     this->arriveCycle = arriveCycle;
     this->departureRound = departureRound;
+    this->departureCycle = departureCycle;
     this->size = size;
 }
 
@@ -34,4 +36,12 @@ int Packet::getSize() const {
 
 int Packet::getPacketOrder() const {
     return packetOrder;
+}
+
+int Packet::getDepartureCycle() const {
+    return departureCycle;
+}
+
+void Packet::setDepartureCycle(int departureCycle) {
+    Packet::departureCycle = departureCycle;
 }

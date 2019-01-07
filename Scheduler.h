@@ -14,16 +14,15 @@ class Scheduler {
 private:
     static const int DEFAULT_VOLUME = 3;
     int volume;                     // num of levels in scheduler
-    int currentRound;           // current time
-    int currentCycle;               // current cycle
+    int currentRound;           // current Round
     Level levels[3];
 public:
     Scheduler();
     explicit Scheduler(int volume);
     void push(Packet packet);
     Packet serveCycle();
-
     void setCurrentRound(int currentRound);
+    vector<Packet> serveUpperLevel(int &);
 };
 
 
