@@ -54,7 +54,6 @@
 - Packet Order: Identify packet order in the same flow 
 
 - Arrive Cycle: Current Packet Arrival Time = last Packet Arrival Time + Random.union/exp
-
 (first pack arrival time set to 0 or possion) 
 
 - Packet Size: Packet size in flow, set to 1 now
