@@ -2,6 +2,8 @@
 
 ### Input: config.txt
 
+
+
 #### for union random trace_generator.py
 #### [Flow Num] [Weight] [Flow Length] [Arrival Randomness] [Packet Size]
 
@@ -14,6 +16,8 @@
 - Arrival Randomness: Calculate arrive time
 
 - Packet Size: Packet size in flow, set to 1 now
+
+
 
 #### for possion random trace_generator.py
 #### [Flow Num] [Weight] [Flow Length] [Possion lamba] [Exp lamba] [Packet Size]
@@ -32,14 +36,6 @@
 
 
 
-10 // num of flows
-[flow flowId] [flow weight]
-...
-153
-[flowId] [packetOrder] [arriveCycle] [packetSize]
-1 0 0 1
-2 0 0 1
-3 0 0 1
 ### Output: trace.txt
 
 #### [Total Flow]
