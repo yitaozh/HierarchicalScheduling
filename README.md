@@ -51,19 +51,22 @@
 
 - Flow Id: Identify flow order from input config 
 
-- Flow weight:
+- Flow weight: Calculate departure time 
 
 - Total Packet: Total Num of Packets from input config
 
 - PacketOrder: Identify packet order in the same flow 
 
-- ArriveCycle: Current Packet Arrival Time = last Packet Arrival Time + Random(0, Arrival Randomness)
-(first pack arrival time set to 0) 
+- ArriveCycle: Current Packet Arrival Time = last Packet Arrival Time + Random.union/exp
+(first pack arrival time set to 0 or possion) 
 
 - Packet Size: Packet size in flow, set to 1 now
+
+
+
+
+- For calculate departure time:
 ```
 Max(Current Packet Arrival Round, Last Packet Departure Round of the corresponding flow) + (1 / Weight) * Packet size  
 (first pack departure time set to (1 / Weight) * Packet size)    
 ```
-
-- Packet Size: Same as Input Packet Size, set to 1 now
