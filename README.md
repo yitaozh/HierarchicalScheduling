@@ -2,12 +2,14 @@
 
 ### Input: config.txt
 
+
+
 #### for union random trace_generator.py
-#### [Flow Num] [Weight] [Flow Length] [Arrival Randomness] [Packet Size]
+#### [Flow Id] [Flow Weight] [Flow Length] [Arrival Randomness] [Packet Size]
 
-- Flow Num: Identify flow
+- Flow Id: Identify flow order from input config
 
-- Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
+- Flow Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
 
 - Flow Length: Packet number in flow
 
@@ -15,12 +17,14 @@
 
 - Packet Size: Packet size in flow, set to 1 now
 
+
+
 #### for possion random trace_generator.py
-#### [Flow Num] [Weight] [Flow Length] [Possion lamba] [Exp lamba] [Packet Size]
+#### [Flow Id] [Flow Weight] [Flow Length] [Possion lamba] [Exp lamba] [Packet Size]
 
-- Flow Num: Identify flow
+- Flow Id: Identify flow order from input config
 
-- Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
+- Flow Weight: Calculate departure time              //what if (Packet Size/weight) is not integer ? 
 
 - Flow Length: Packet number in flow
 
@@ -32,24 +36,33 @@
 
 
 
-
 ### Output: trace.txt
+
+#### [Total Flow]
+#### [Flow Id] [Flow Weight]
 #### [Total Packet]
-#### [Flow Num][Packet Num][Arrival Time][Departure time] [Packet Size]
+#### [flow Id] [Packet Order] [Arrive Cycle] [Packet Size]
+
+- Total Flow : Total Num of Flows from input config
+
+- Flow Id: Identify flow order from input config 
+
+- Flow Weight: Calculate departure time 
 
 - Total Packet: Total Num of Packets from input config
 
-- Flow Num: Same as ‘Flow Num’ in input file
+- Packet Order: Identify packet order in the same flow 
 
-- Packet Num: Identify packet order in the same flow 
+- Arrive Cycle: Current Packet Arrival Time = last Packet Arrival Time + Random.union/exp
+(first pack arrival time set to 0 or possion) 
 
-- Arrival Time: Current Packet Arrival Time = last Packet Arrival Time + Random(0, Arrival Randomness)
-(first pack arrival time set to 0) 
+- Packet Size: Packet size in flow, set to 1 now
 
-- Departure time: 
+
+
+
+For calculate departure time:
 ```
 Max(Current Packet Arrival Round, Last Packet Departure Round of the corresponding flow) + (1 / Weight) * Packet size  
 (first pack departure time set to (1 / Weight) * Packet size)    
 ```
-
-- Packet Size: Same as Input Packet Size, set to 1 now
