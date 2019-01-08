@@ -25,15 +25,16 @@ int main() {
 
     vector<Packet> flows[2];
 
-    for (int cycle = 0, num = 0; num < simulator.numOfPackets(); cycle++) {
+    for (int cycle = 0, packetNum = 0; packetNum < simulator.numOfPackets(); cycle++) {
         vector<Packet> packets = simulator.runRound();
         if (packets.empty()) continue;
         for (auto packet: packets) {
+            packet.setDepartureRound(cycle);
             if (packet.getFlowId() == 1)
                 flows[0].push_back(packet);
             else
                 flows[1].push_back(packet);
-            num++;
+            packetNum++;
         }
     }
 
