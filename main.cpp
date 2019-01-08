@@ -29,7 +29,7 @@ int main() {
         vector<Packet> packets = simulator.runRound();
         if (packets.empty()) continue;
         for (auto packet: packets) {
-            packet.setDepartureRound(cycle);
+            // packet.setDepartureRound(cycle);
             if (packet.getFlowId() == 1)
                 flows[0].push_back(packet);
             else
