@@ -18,6 +18,7 @@ Simulator::Simulator() {
 vector<Packet> Simulator::runRound() {
     vector<Packet> result;
     Packet tmp = runCycle();
+    int currentCycle_backup = currentCycle;
     while (tmp.getPacketOrder() != -1) {
         currentCycle++;
         tmp.setDepartureCycle(currentCycle);
@@ -32,6 +33,8 @@ vector<Packet> Simulator::runRound() {
     result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
     //current round done
     currentRound++;
+    if (currentCycle == currentCycle_backup)
+        currentCycle++;
     scheduler.setCurrentRound(currentRound);
     return result;
 }
