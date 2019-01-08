@@ -25,6 +25,7 @@ public:
     vector<Packet> runRound();
     // serve package counter, count package from scheduler output
     Packet runCycle();
+    int numOfFlows();
     int numOfPackets();
 };
 

@@ -48,13 +48,17 @@ Packet Simulator::runCycle() {
     return scheduler.serveCycle();
 }
 
-int Simulator::numOfPackets() {
-    return static_cast<int>(packets.size());
-}
-
 int Simulator::calDepartureRound(int flowId, int packetSize) {
     int departureRound = static_cast<int>(ceil(max(currentRound, flows[flowId].getLastDepartureRound())
             + 1 / flows[flowId].getWeight() * packetSize));
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
+}
+
+int Simulator::numOfFlows() {
+    return static_cast<int>(flows.size());
+}
+
+int Simulator::numOfPackets() {
+    return static_cast<int>(packets.size());
 }
