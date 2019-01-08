@@ -19,7 +19,7 @@ int main() {
     }
     */
 
-    string filename = "schedulingResult.txt";
+    string filename = "schedulingResultTest1.txt";
 
     outputFile.open(filename);
 
