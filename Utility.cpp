@@ -18,7 +18,7 @@ void readFile(vector<Flow>& flows, vector<Packet>& packets) {
     getline(cin, filename);
     if (filename.empty())
     */
-    filename = "trace.txt";
+    filename = "trace.output";
 
     inputFile.open(filename);
     if (!inputFile) {

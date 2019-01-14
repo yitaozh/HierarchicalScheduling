@@ -29,7 +29,6 @@ vector<Packet> Simulator::runRound() {
     //serve the level1 and level2 fifo
     vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle);
 
-
     result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
     //current round done
     currentRound++;
@@ -41,7 +40,7 @@ vector<Packet> Simulator::runRound() {
 
 Packet Simulator::runCycle() {
     //push arrive packets to scheduler
-    while (currentPacketIndex <=packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
+    while (currentPacketIndex < packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
         Packet packet = packets[currentPacketIndex++];
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
         packet.setDepartureRound(departureRound);
