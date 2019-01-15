@@ -10,6 +10,6 @@
 #include <vector>
 using namespace std;
 
-void readFile(vector<Flow>&, vector<Packet> &);
+void readFile(string, vector<Flow>&, vector<Packet> &);
 
 #endif //HIERARCHICALSCHEDULING_UTILITY_H

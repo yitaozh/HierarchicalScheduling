@@ -1,3 +1,9 @@
+#include <utility>
+
+#include <utility>
+
+#include <utility>
+
 
 //
 // Created by Zhou Yitao on 2018-12-04.
@@ -8,8 +14,13 @@
 
 using namespace std;
 
-Simulator::Simulator() {
-    readFile(flows, packets);
+Simulator::Simulator(vector<Flow> flows, vector<Packet> packets) {
+//    for (auto flow: flows)
+//        this->flows.push_back(flow);
+//    for (auto packet: packets)
+//        this->packets.push_back(packet);
+    this->flows = move(flows);
+    this->packets = move(packets);
     currentRound = 0;
     currentCycle = 0;
     currentPacketIndex = 0;

@@ -6,23 +6,14 @@
 #include "Utility.h"
 using namespace std;
 
-void readFile(vector<Flow>& flows, vector<Packet>& packets) {
+void readFile(string inputFilename, vector<Flow>& flows, vector<Packet>& packets) {
     ifstream inputFile;
-    string filename;
     int numOfFlows;
     int numOfPackage;
 
-    /*
-    cout << "Please enter the filename, press ENTER to use result.txt directly" << endl;
-
-    getline(cin, filename);
-    if (filename.empty())
-    */
-    filename = "trace.output";
-
-    inputFile.open(filename);
+    inputFile.open(inputFilename);
     if (!inputFile) {
-        cout << "Couldn't open " << filename << " !" << endl;
+        cout << "Couldn't open " << inputFilename << " !" << endl;
         exit(1);
     }
     inputFile >> numOfFlows;

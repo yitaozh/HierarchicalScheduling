@@ -20,7 +20,7 @@ private:
     int currentPacketIndex;
 
 public:
-    Simulator();
+    Simulator(vector<Flow>, vector<Packet>);
     int calDepartureRound(int, int);
     vector<Packet> runRound();
     // serve package counter, count package from scheduler output

@@ -6,22 +6,27 @@
 
 using namespace std;
 
-int main() {
-    Simulator simulator;
+int main(int argc, char **argv) {
+    // get input file name as a parameter of the program
+    string inputFilename = argv[1];
 
+    // get output file name
+    string delimiter = ".";
+    string outputFilename = inputFilename.substr(0, inputFilename.find(delimiter)) + ".output";
+
+    // open output file
     ofstream outputFile;
+    outputFile.open(outputFilename);
+
+    vector<Flow> tmpFlows;
+    vector<Packet> tmpPackets;
+    readFile(inputFilename, tmpFlows, tmpPackets);
+
+    Simulator simulator(tmpFlows, tmpPackets);
 
     outputFile << "Packet Num: " << simulator.numOfPackets() << endl;
 
-    /*
-    for (auto packet: simulator.packets) {
-        cout << "FlowNum: " << packet.getFlowId() << " packetNum: " << packet.getPacketOrder() << endl;
-    }
-    */
-
-    string filename = "schedulingResultTest.output";
-
-    outputFile.open(filename);
+    // output file name
 
     vector<vector<Packet>> flows(static_cast<unsigned long>(simulator.numOfFlows()));
 
@@ -40,10 +45,6 @@ int main() {
     for (int i = 0; i < simulator.numOfFlows(); i++) {
         outputFile << "flow " << i + 1 << endl;
         for (auto packet: flows[i]) {
-//            outputFile << "packet order: " << packet.getPacketOrder() << " ";
-//            outputFile << "arrive cycle: " << packet.getArriveCycle() << " ";
-//            outputFile << "depart round: " << packet.getDepartureRound() << " ";
-//            outputFile << "depart cycle: " << packet.getDepartureCycle() << endl;
             outputFile << packet.getPacketOrder() << " ";
             outputFile << packet.getDepartureRound() << " ";
             outputFile << packet.getDepartureCycle() << endl;
