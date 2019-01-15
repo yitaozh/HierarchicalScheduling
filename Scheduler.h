@@ -22,7 +22,7 @@ public:
     void push(Packet packet);
     Packet serveCycle();
     void setCurrentRound(int currentRound);
-    vector<Packet> serveUpperLevel(int &);
+    vector<Packet> serveUpperLevel(int &, int);
 };
 
 

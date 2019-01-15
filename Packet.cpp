@@ -9,13 +9,14 @@ Packet::Packet(int flowNum, int packageNum, int arriveCycle,
     this->flowId = flowNum;
     this->packetOrder = packageNum;
     this->arriveCycle = arriveCycle;
-    this->departureRound = departureRound;
     this->departureCycle = departureCycle;
+    this->thryDepartureRound = departureRound;
+    this->actlDepartureRound = -1;
     this->size = size;
 }
 
-int Packet::getDepartureRound() const {
-    return departureRound;
+int Packet::getThryDepartureRound() const {
+    return thryDepartureRound;
 }
 
 int Packet::getFlowId() const {
@@ -26,8 +27,8 @@ int Packet::getArriveCycle() const {
     return arriveCycle;
 }
 
-void Packet::setDepartureRound(int departureRound) {
-    this->departureRound = departureRound;
+void Packet::setThryDepartureRound(int departureRound) {
+    this->thryDepartureRound = departureRound;
 };
 
 int Packet::getSize() const {
@@ -44,4 +45,12 @@ int Packet::getDepartureCycle() const {
 
 void Packet::setDepartureCycle(int departureCycle) {
     Packet::departureCycle = departureCycle;
+}
+
+int Packet::getActlDepartureRound() const {
+    return actlDepartureRound;
+}
+
+void Packet::setActlDepartureRound(int actlDepartureRound) {
+    Packet::actlDepartureRound = actlDepartureRound;
 }

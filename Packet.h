@@ -11,15 +11,14 @@ private:
     int flowId;            //Identify flow
     int packetOrder;         //Packet number in flow
     int arriveCycle;
-    int departureRound;
     int departureCycle;
+    int thryDepartureRound;
+    int actlDepartureRound;
     int size;
 
 public:
     Packet(int flowNum, int packageNum, int arriveCycle,
             int departureRound, int departureCycle, int size);
-
-    int getDepartureRound() const;
 
     int getArriveCycle() const;
 
@@ -27,7 +26,13 @@ public:
 
     void setDepartureCycle(int departureCycle);
 
-    void setDepartureRound(int departureRound);
+    int getThryDepartureRound() const;
+
+    void setThryDepartureRound(int departureRound);
+
+    int getActlDepartureRound() const;
+
+    void setActlDepartureRound(int actlDepartureRound);
 
     int getFlowId() const;
 

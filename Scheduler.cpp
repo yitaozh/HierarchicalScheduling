@@ -19,7 +19,7 @@ Scheduler::Scheduler(int volume) {
 }
 
 void Scheduler::push(Packet packet) {
-    int departureRound = packet.getDepartureRound();
+    int departureRound = packet.getThryDepartureRound();
     departureRound = max(departureRound, currentRound);
     if (departureRound - currentRound >= 100)
         levels[2].push(packet, departureRound / 100);
@@ -30,7 +30,7 @@ void Scheduler::push(Packet packet) {
 
 Packet Scheduler::serveCycle() {
     Packet packet = levels[0].pull();
-    if (packet.getDepartureRound() == -1) {
+    if (packet.getThryDepartureRound() == -1) {
         levels[0].getAndIncrementIndex();
 
         if (levels[0].getCurrentIndex() == 0) {
@@ -43,7 +43,7 @@ Packet Scheduler::serveCycle() {
     return packet;
 }
 
-vector<Packet> Scheduler::serveUpperLevel(int& currentCycle) {
+vector<Packet> Scheduler::serveUpperLevel(int& currentCycle, int currentRound) {
     vector<Packet> result;
 
     if (!levels[1].isCurrentFifoEmpty()) {
@@ -54,6 +54,7 @@ vector<Packet> Scheduler::serveUpperLevel(int& currentCycle) {
                 break;
             currentCycle++;
             tmp.setDepartureCycle(currentCycle);
+            tmp.setActlDepartureRound(currentRound);
             result.push_back(tmp);
         }
     }
@@ -66,6 +67,7 @@ vector<Packet> Scheduler::serveUpperLevel(int& currentCycle) {
                 break;
             currentCycle++;
             tmp.setDepartureCycle(currentCycle);
+            tmp.setActlDepartureRound(currentRound);
             result.push_back(tmp);
         }
     }

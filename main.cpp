@@ -35,7 +35,8 @@ int main(int argc, char **argv) {
         if (packets.empty()) continue;
 
         for (auto packet: packets) {
-            // packet.setDepartureRound(cycle);
+            // packet.setThryDepartureRound(cycle);
+
             flows[packet.getFlowId() - 1].push_back(packet);
 
             packetNum++;
@@ -46,7 +47,8 @@ int main(int argc, char **argv) {
         outputFile << "flow " << i + 1 << endl;
         for (auto packet: flows[i]) {
             outputFile << packet.getPacketOrder() << " ";
-            outputFile << packet.getDepartureRound() << " ";
+            outputFile << packet.getThryDepartureRound() << " ";
+            outputFile << packet.getActlDepartureRound() << " ";
             outputFile << packet.getDepartureCycle() << endl;
         }
     }
