@@ -76,6 +76,7 @@ Packet Simulator::runCycle() {
     while (currentPacketIndex < packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
         Packet packet = packets[currentPacketIndex++];
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
+        packet.setArriveRound(currentRound);
         packet.setThryDepartureRound(departureRound);
         scheduler.push(packet);
         packetNum++;

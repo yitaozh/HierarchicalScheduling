@@ -11,6 +11,7 @@ private:
     int flowId;            //Identify flow
     int packetOrder;         //Packet number in flow
     int arriveCycle;
+    int arriveRound;
     int departureCycle;
     int thryDepartureRound;
     int actlDepartureRound;
@@ -54,6 +55,10 @@ public:
     int getFifoPosition() const;
 
     void setFifoPosition(int fifoPosition);
+
+    int getArriveRound() const;
+
+    void setArriveRound(int arriveRound);
 };
 
 

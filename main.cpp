@@ -13,10 +13,17 @@ int main(int argc, char **argv) {
     // get output file name
     string delimiter = ".";
     string outputFilename = inputFilename.substr(0, inputFilename.find(delimiter)) + ".output";
+    string outputRecordFilename = inputFilename.substr(0, inputFilename.find(delimiter)) + "_record.output";
+    string outputDetailedFilename = inputFilename.substr(0, inputFilename.find(delimiter)) + "_detailed.output";
 
     // open output file
     ofstream outputFile;
     outputFile.open(outputFilename);
+    ofstream outputRecordFile;
+    outputRecordFile.open(outputRecordFilename);
+    ofstream outputDetailedFile;
+    outputDetailedFile.open(outputDetailedFilename);
+
 
     vector<Flow> tmpFlows;
     vector<Packet> tmpPackets;
@@ -43,6 +50,7 @@ int main(int argc, char **argv) {
         }
     }
 
+    //output to graph python program
     for (int i = 0; i < simulator.numOfFlows(); i++) {
         outputFile << "flow " << i + 1 << endl;
         for (auto packet: flows[i]) {
@@ -53,10 +61,34 @@ int main(int argc, char **argv) {
         }
     }
 
+    //output to detailed file
+    for (int i = 0; i < simulator.numOfFlows(); i++) {
+        outputDetailedFile << "flow " << i + 1 << endl;
+        outputDetailedFile << "Packet" << "\t" << "ArrCycle" << "\t";
+        outputDetailedFile << "ArrRound" << "\t";
+        outputDetailedFile << "ThryDepRnd" << "\t" << "ActlDepRnd" << "\t";
+        outputDetailedFile << "DepCycle" << "\t" << "InsLvl" << "\t";
+        outputDetailedFile << "InsFifo" << "\t" << "PosInFifo" << endl;
+
+        for (auto packet: flows[i]) {
+            outputDetailedFile << packet.getPacketOrder() << "\t\t";
+            outputDetailedFile << packet.getArriveCycle() << "\t\t\t";
+            outputDetailedFile << packet.getArriveRound() << "\t\t\t";
+            outputDetailedFile << packet.getThryDepartureRound() << "\t\t\t";
+            outputDetailedFile << packet.getActlDepartureRound() << "\t\t\t";
+            outputDetailedFile << packet.getDepartureCycle() << "\t\t\t";
+            outputDetailedFile << packet.getInsertLevel() << "\t\t";
+            outputDetailedFile << packet.getInsertFifo() << "\t\t";
+            outputDetailedFile << packet.getFifoPosition() << endl;
+        }
+    }
+
     vector<int> packetNumRecord = simulator.getPacketNumRecord();
     for (int i = 0; i < packetNumRecord.size(); i++) {
-        outputFile << i << " ";
-        outputFile << packetNumRecord[i] << endl;
+        outputRecordFile << i << " ";
+        outputRecordFile << packetNumRecord[i] << endl;
     }
+
+
     return 0;
 }

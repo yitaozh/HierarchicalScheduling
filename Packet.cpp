@@ -81,3 +81,11 @@ int Packet::getFifoPosition() const {
 void Packet::setFifoPosition(int fifoPosition) {
     Packet::fifoPosition = fifoPosition;
 }
+
+int Packet::getArriveRound() const {
+    return arriveRound;
+}
+
+void Packet::setArriveRound(int arriveRound) {
+    Packet::arriveRound = arriveRound;
+}
