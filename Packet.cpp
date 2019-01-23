@@ -13,6 +13,9 @@ Packet::Packet(int flowNum, int packageNum, int arriveCycle,
     this->thryDepartureRound = departureRound;
     this->actlDepartureRound = -1;
     this->size = size;
+    this->insertLevel = -1;
+    this->insertFifo = -1;
+    this->fifoPosition = -1;
 }
 
 int Packet::getThryDepartureRound() const {
@@ -53,4 +56,28 @@ int Packet::getActlDepartureRound() const {
 
 void Packet::setActlDepartureRound(int actlDepartureRound) {
     Packet::actlDepartureRound = actlDepartureRound;
+}
+
+int Packet::getInsertLevel() const {
+    return insertLevel;
+}
+
+void Packet::setInsertLevel(int insertLevel) {
+    Packet::insertLevel = insertLevel;
+}
+
+int Packet::getInsertFifo() const {
+    return insertFifo;
+}
+
+void Packet::setInsertFifo(int insertFifo) {
+    Packet::insertFifo = insertFifo;
+}
+
+int Packet::getFifoPosition() const {
+    return fifoPosition;
+}
+
+void Packet::setFifoPosition(int fifoPosition) {
+    Packet::fifoPosition = fifoPosition;
 }

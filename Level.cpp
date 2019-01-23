@@ -8,6 +8,8 @@ Level::Level(): volume(10), currentIndex(0) {
 }
 
 void Level::push(Packet packet, int index) {
+    packet.setInsertFifo(index);
+    packet.setFifoPosition(static_cast<int>(fifos[index].size()));
     fifos[index].push_back(packet);
 }
 

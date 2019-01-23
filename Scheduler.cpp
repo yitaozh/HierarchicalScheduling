@@ -21,11 +21,16 @@ Scheduler::Scheduler(int volume) {
 void Scheduler::push(Packet packet) {
     int departureRound = packet.getThryDepartureRound();
     departureRound = max(departureRound, currentRound);
-    if (departureRound - currentRound >= 100)
+    if (departureRound - currentRound >= 100) {
+        packet.setInsertLevel(2);
         levels[2].push(packet, departureRound / 100);
-    else if (departureRound - currentRound >= 10)
+    } else if (departureRound - currentRound >= 10) {
+        packet.setInsertLevel(1);
         levels[1].push(packet, departureRound / 10 % 10);
-    else levels[0].push(packet, departureRound % 10);
+    } else {
+        packet.setInsertLevel(0);
+        levels[0].push(packet, departureRound % 10);
+    }
 }
 
 Packet Scheduler::serveCycle() {

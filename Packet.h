@@ -15,6 +15,9 @@ private:
     int thryDepartureRound;
     int actlDepartureRound;
     int size;
+    int insertLevel;
+    int insertFifo;
+    int fifoPosition;
 
 public:
     Packet(int flowNum, int packageNum, int arriveCycle,
@@ -39,6 +42,18 @@ public:
     int getSize() const;
 
     int getPacketOrder() const;
+
+    int getInsertLevel() const;
+
+    void setInsertLevel(int insertLevel);
+
+    int getInsertFifo() const;
+
+    void setInsertFifo(int insertFifo);
+
+    int getFifoPosition() const;
+
+    void setFifoPosition(int fifoPosition);
 };
 
 
