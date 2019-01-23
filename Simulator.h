@@ -18,6 +18,8 @@ private:
     vector<Flow> flows;
     vector<Packet> packets;
     int currentPacketIndex;
+    int packetNum;      // current num of packets in sim.
+    vector<int> packetNumRecord;
 
 public:
     Simulator(vector<Flow>, vector<Packet>);
@@ -27,6 +29,7 @@ public:
     Packet runCycle();
     int numOfFlows();
     int numOfPackets();
+    const vector<int> &getPacketNumRecord() const;
 };
 
 

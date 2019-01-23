@@ -52,5 +52,11 @@ int main(int argc, char **argv) {
             outputFile << packet.getDepartureCycle() << endl;
         }
     }
+
+    vector<int> packetNumRecord = simulator.getPacketNumRecord();
+    for (int i = 0; i < packetNumRecord.size(); i++) {
+        outputFile << i << " ";
+        outputFile << packetNumRecord[i] << endl;
+    }
     return 0;
 }
