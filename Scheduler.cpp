@@ -23,13 +23,13 @@ void Scheduler::push(Packet packet) {
     departureRound = max(departureRound, currentRound);
     if (departureRound - currentRound >= 100) {
         packet.setInsertLevel(2);
-        levels[2].push(packet, departureRound / 100);
+        levels[2].push(packet, (departureRound % 1000) / 100);
     } else if (departureRound - currentRound >= 10) {
         packet.setInsertLevel(1);
-        levels[1].push(packet, departureRound / 10 % 10);
+        levels[1].push(packet, (departureRound % 1000) / 10 % 10);
     } else {
         packet.setInsertLevel(0);
-        levels[0].push(packet, departureRound % 10);
+        levels[0].push(packet, (departureRound % 1000) % 10);
     }
 }
 
@@ -52,7 +52,7 @@ vector<Packet> Scheduler::serveUpperLevel(int& currentCycle, int currentRound) {
     vector<Packet> result;
 
     if (!levels[1].isCurrentFifoEmpty()) {
-        int size = static_cast<int>(ceil(levels[1].getCurrentFifoSize() * 1.0 / (10 - levels[1].getCurrentIndex())));
+        int size = levels[1].getCurrentFifoSize();
         for (int i = 0; i < size; i++) {
             Packet tmp = levels[1].pull();
             if (tmp.getPacketOrder() == -1)
@@ -64,8 +64,8 @@ vector<Packet> Scheduler::serveUpperLevel(int& currentCycle, int currentRound) {
         }
     }
 
-    if (!levels[2].isCurrentFifoEmpty()) {
-        int size = static_cast<int>(ceil(levels[2].getCurrentFifoSize() * 1.0 / (100 - levels[2].getCurrentIndex())));
+    if (currentRound % 100 == 0 && !levels[2].isCurrentFifoEmpty()) {
+        int size = levels[2].getCurrentFifoSize();
         for (int i = 0; i < size; i++) {
             Packet tmp = levels[2].pull();
             if (tmp.getPacketOrder() == -1)

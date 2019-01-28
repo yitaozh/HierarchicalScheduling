@@ -33,6 +33,17 @@ Simulator::Simulator(vector<Flow> flows, vector<Packet> packets) {
  * */
 vector<Packet> Simulator::runRound() {
     vector<Packet> result;
+    if (currentRound % 10 == 0) {
+        vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle, currentRound);
+
+        for (int i = 0; i < upperLevelPackets.size(); i++) {
+            packetNumRecord.push_back(packetNum);
+            packetNum--;
+        }
+
+        result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
+    }
+
     Packet tmp = runCycle();
     // backup cycle for the idling situation
     int currentCycle_backup = currentCycle;
@@ -48,15 +59,6 @@ vector<Packet> Simulator::runRound() {
         tmp = runCycle();
     }
 
-    //serve the level1 and level2 fifo
-    vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle, currentRound);
-
-    for (int i = 0; i < upperLevelPackets.size(); i++) {
-        packetNumRecord.push_back(packetNum);
-        packetNum--;
-    }
-
-    result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
     //current round done
     currentRound++;
     // in case there's no packet being served, cycle increase 1 as idling
