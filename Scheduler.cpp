@@ -51,10 +51,10 @@ Packet Scheduler::serveCycle() {
 vector<Packet> Scheduler::serveUpperLevel(int& currentCycle, int currentRound) {
     vector<Packet> result;
 
-    if (!levels[1].isCurrentFifoEmpty()) {
-        int size = levels[1].getCurrentFifoSize();
+    if (currentRound % 100 == 0 && !levels[2].isCurrentFifoEmpty()) {
+        int size = levels[2].getCurrentFifoSize();
         for (int i = 0; i < size; i++) {
-            Packet tmp = levels[1].pull();
+            Packet tmp = levels[2].pull();
             if (tmp.getPacketOrder() == -1)
                 break;
             currentCycle++;
@@ -64,10 +64,10 @@ vector<Packet> Scheduler::serveUpperLevel(int& currentCycle, int currentRound) {
         }
     }
 
-    if (currentRound % 100 == 0 && !levels[2].isCurrentFifoEmpty()) {
-        int size = levels[2].getCurrentFifoSize();
+    if (!levels[1].isCurrentFifoEmpty()) {
+        int size = levels[1].getCurrentFifoSize();
         for (int i = 0; i < size; i++) {
-            Packet tmp = levels[2].pull();
+            Packet tmp = levels[1].pull();
             if (tmp.getPacketOrder() == -1)
                 break;
             currentCycle++;
