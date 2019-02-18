@@ -16,6 +16,8 @@ private:
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     Level levels[3];
+    Level hundredLevel;
+    Level decadeLevel;
 public:
     Scheduler();
     explicit Scheduler(int volume);

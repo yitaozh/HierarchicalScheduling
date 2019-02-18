@@ -15,6 +15,7 @@ private:
     int flowId;
     float weight;
     int lastDepartureRound;
+    int insertLevel;
 public:
     Flow(int id, float weight);
 
@@ -24,6 +25,10 @@ public:
     void setLastDepartureRound(int lastDepartureRound);
 
     void setWeight(float weight);
+
+    int getInsertLevel() const;
+
+    void setInsertLevel(int insertLevel);
 };
 
 
