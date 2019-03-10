@@ -33,16 +33,14 @@ Simulator::Simulator(vector<Flow> flows, vector<Packet> packets) {
  * */
 vector<Packet> Simulator::runRound() {
     vector<Packet> result;
-    if (currentRound % 10 == 0) {
-        vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle, currentRound);
+    vector<Packet> upperLevelPackets = scheduler.serveUpperLevel(currentCycle, currentRound);
 
-        for (int i = 0; i < upperLevelPackets.size(); i++) {
-            packetNumRecord.push_back(packetNum);
-            packetNum--;
-        }
-
-        result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
+    for (int i = 0; i < upperLevelPackets.size(); i++) {
+        packetNumRecord.push_back(packetNum);
+        packetNum--;
     }
+
+    result.insert(result.end(), upperLevelPackets.begin(), upperLevelPackets.end());
 
     Packet tmp = runCycle();
     // backup cycle for the idling situation
@@ -80,7 +78,7 @@ Packet Simulator::runCycle() {
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
         packet.setArriveRound(currentRound);
         packet.setThryDepartureRound(departureRound);
-        int flowId = packet.getFlowId();
+        int flowId = packet.getFlowId() - 1;
         int insertLevel = scheduler.push(packet, flows[flowId].getInsertLevel());
         flows[flowId].setInsertLevel(insertLevel);
         packetNum++;

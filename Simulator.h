@@ -12,6 +12,7 @@ using namespace std;
 
 class Simulator {
 private:
+    const int DEFAULT_VOLUME = 3;
     int currentRound;
     int currentCycle;
     Scheduler scheduler;
