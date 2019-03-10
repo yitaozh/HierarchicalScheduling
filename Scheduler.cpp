@@ -21,7 +21,7 @@ void Scheduler::setCurrentRound(int currentRound) {
 int Scheduler::push(Packet packet, int insertLevel) {
     int departureRound = packet.getThryDepartureRound();
     departureRound = max(departureRound, currentRound);
-    if (departureRound / 100 != currentRound / 100) {
+    if (departureRound / 100 != currentRound / 100 || insertLevel == 2) {
         if (departureRound / 100 == 5) {
             packet.setInsertLevel(1);
             hundredLevel.push(packet, (departureRound % 1000) / 10 % 10);
@@ -31,7 +31,7 @@ int Scheduler::push(Packet packet, int insertLevel) {
             levels[2].push(packet, (departureRound % 1000) / 100);
             return 2;
         }
-    } else if (departureRound / 10 != currentRound / 10) {
+    } else if (departureRound / 10 != currentRound / 10 || insertLevel == 1) {
         if (departureRound / 10 % 10 == 5) {
             packet.setInsertLevel(0);
             decadeLevel.push(packet, (departureRound % 1000) % 10);
