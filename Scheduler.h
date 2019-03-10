@@ -21,7 +21,7 @@ private:
 public:
     Scheduler();
     explicit Scheduler(int volume);
-    void push(Packet packet);
+    int push(Packet packet, int insertLevel);
     Packet serveCycle();
     void setCurrentRound(int currentRound);
     vector<Packet> serveUpperLevel(int &, int);

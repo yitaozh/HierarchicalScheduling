@@ -80,7 +80,9 @@ Packet Simulator::runCycle() {
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
         packet.setArriveRound(currentRound);
         packet.setThryDepartureRound(departureRound);
-        scheduler.push(packet);
+        int flowId = packet.getFlowId();
+        int insertLevel = scheduler.push(packet, flows[flowId].getInsertLevel());
+        flows[flowId].setInsertLevel(insertLevel);
         packetNum++;
     }
     //pull one packet out
