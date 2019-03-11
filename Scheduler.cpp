@@ -22,28 +22,28 @@ int Scheduler::push(Packet packet, int insertLevel) {
     int departureRound = packet.getThryDepartureRound();
     departureRound = max(departureRound, currentRound);
     if (departureRound / 100 != currentRound / 100 || insertLevel == 2) {
-        if (departureRound / 100 == 5) {
+        if (departureRound / 100 % 10 == 5) {
             packet.setInsertLevel(1);
-            hundredLevel.push(packet, (departureRound % 1000) / 10 % 10);
+            hundredLevel.push(packet, departureRound / 10 % 10);
             return 1;
         } else {
             packet.setInsertLevel(2);
-            levels[2].push(packet, (departureRound % 1000) / 100);
+            levels[2].push(packet, departureRound / 100 % 10);
             return 2;
         }
     } else if (departureRound / 10 != currentRound / 10 || insertLevel == 1) {
         if (departureRound / 10 % 10 == 5) {
             packet.setInsertLevel(0);
-            decadeLevel.push(packet, (departureRound % 1000) % 10);
+            decadeLevel.push(packet, departureRound  % 10);
             return 0;
         } else {
             packet.setInsertLevel(1);
-            levels[1].push(packet, (departureRound % 1000) / 10 % 10);
+            levels[1].push(packet, departureRound / 10 % 10);
             return 1;
         }
     } else {
         packet.setInsertLevel(0);
-        levels[0].push(packet, (departureRound % 1000) % 10);
+        levels[0].push(packet, departureRound % 10);
         return 0;
     }
 }
@@ -63,12 +63,11 @@ Packet Scheduler::serveCycle() {
     return packet;
 }
 
-vector<Packet> Scheduler::serveUpperLevel(int &currentCycle, int currentRound_backup) {
+vector<Packet> Scheduler::serveUpperLevel(int &currentCycle, int currentRound) {
     vector<Packet> result;
 
-    currentCycle = currentRound_backup % 1000;
     //first level 2
-    if (currentRound / 100 == 5) {
+    if (currentRound / 100 % 10 == 5) {
         int size = static_cast<int>(ceil(hundredLevel.getCurrentFifoSize() * 1.0 / (10 - currentRound % 10)));
         for (int i = 0; i < size; i++) {
             Packet tmp = hundredLevel.pull();

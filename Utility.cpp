@@ -16,6 +16,7 @@ void readFile(string inputFilename, vector<Flow>& flows, vector<Packet>& packets
         cout << "Couldn't open " << inputFilename << " !" << endl;
         exit(1);
     }
+    cout << inputFilename << " open successfully!" << endl;
     inputFile >> numOfFlows;
     for (int i = 0; i < numOfFlows; i++) {
         int flowId;
