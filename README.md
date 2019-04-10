@@ -1,5 +1,7 @@
 # HierarchicalScheduling
 
+#### *** NOTE: This branch meets requirement for Scheme 1 where upper level are partially every cycle, and implements dynamic jumping feature. *** 
+
 ### Input: config.txt
 
 
