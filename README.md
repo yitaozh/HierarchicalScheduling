@@ -1,5 +1,7 @@
 # HierarchicalScheduling
 
+#### *** NOTE: This branch upper level packets are served in one turn ***
+
 ### Input: config.txt
 
 
