@@ -8,7 +8,6 @@ Flow::Flow(int id, float weight) {
     lastDepartureRound = 0;
     this->flowId = id;
     this->weight = weight;
-    this->insertLevel = 0;
 }
 
 int Flow::getLastDepartureRound() const {
@@ -25,12 +24,4 @@ float Flow::getWeight() const {
 
 void Flow::setWeight(float weight) {
     Flow::weight = weight;
-}
-
-int Flow::getInsertLevel() const {
-    return insertLevel;
-}
-
-void Flow::setInsertLevel(int insertLevel) {
-    Flow::insertLevel = insertLevel;
 }

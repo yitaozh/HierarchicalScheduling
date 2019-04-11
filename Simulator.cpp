@@ -89,7 +89,7 @@ Packet Simulator::runCycle() {
 
 int Simulator::calDepartureRound(int flowId, int packetSize) {
     int departureRound = static_cast<int>(ceil(max(currentRound, flows[flowId].getLastDepartureRound())
-            + 1 / flows[flowId].getWeight() * packetSize));
+            + packetSize * 1.0 / flows[flowId].getWeight()));
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }
