@@ -37,8 +37,9 @@ int main(int argc, char **argv) {
 
     vector<vector<Packet>> flows(static_cast<unsigned long>(simulator.numOfFlows()));
 
-    for (int cycle = 0, packetNum = 0; packetNum < simulator.numOfPackets(); cycle++) {
+    for (int cycle = 0, packetNum = 0; packetNum < simulator.numOfPackets() - simulator.getDropPacketNum(); cycle++) {
         vector<Packet> packets = simulator.runRound();
+
         if (packets.empty()) continue;
 
         for (auto packet: packets) {
@@ -57,7 +58,8 @@ int main(int argc, char **argv) {
             outputFile << packet.getPacketOrder() << " ";
             outputFile << packet.getThryDepartureRound() << " ";
             outputFile << packet.getActlDepartureRound() << " ";
-            outputFile << packet.getDepartureCycle() << endl;
+            outputFile << packet.getDepartureCycle() << " ";
+            outputFile << packet.getArriveCycle() << endl;
         }
     }
 

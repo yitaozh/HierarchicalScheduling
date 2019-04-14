@@ -25,6 +25,7 @@ Simulator::Simulator(vector<Flow> flows, vector<Packet> packets) {
     currentCycle = 0;
     currentPacketIndex = 0;
     packetNum = 0;
+    dropPacketNum = 0;
 }
 
 /* in every round(one level 0 fifo serve out)
@@ -76,6 +77,10 @@ Packet Simulator::runCycle() {
     while (currentPacketIndex < packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
         Packet packet = packets[currentPacketIndex++];
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
+        if (departureRound == -1) {
+            dropPacketNum++;
+            continue;
+        }
         packet.setArriveRound(currentRound);
         packet.setThryDepartureRound(departureRound);
         int flowId = packet.getFlowId() - 1;
@@ -90,6 +95,8 @@ Packet Simulator::runCycle() {
 int Simulator::calDepartureRound(int flowId, int packetSize) {
     int departureRound = static_cast<int>(ceil(max(currentRound, flows[flowId].getLastDepartureRound())
             + 1 / flows[flowId].getWeight() * packetSize));
+    if (departureRound / 100 - currentRound / 100 >= 10)
+        return -1;
     flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }
@@ -104,4 +111,8 @@ int Simulator::numOfPackets() {
 
 const vector<int> &Simulator::getPacketNumRecord() const {
     return packetNumRecord;
+}
+
+int Simulator::getDropPacketNum() const {
+    return dropPacketNum;
 }
