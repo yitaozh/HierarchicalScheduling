@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
     // output file name
 
-    vector<vector<Packet>> flows(static_cast<unsigned long>(simulator.numOfFlows()));
+    vector<vector<Packet>> flows(simulator.numOfFlows(), vector<Packet>(3000));
 
     for (int cycle = 0, packetNum = 0; packetNum < simulator.numOfPackets() - simulator.getDropPacketNum(); cycle++) {
         vector<Packet> packets = simulator.runRound();
@@ -45,11 +45,16 @@ int main(int argc, char **argv) {
         for (auto packet: packets) {
             // packet.setThryDepartureRound(cycle);
 
-            flows[packet.getFlowId() - 1].push_back(packet);
+            flows[packet.getFlowId() - 1][packet.getPacketOrder()] = packet;
 
             packetNum++;
         }
     }
+
+    vector<Packet> droppedPackets = simulator.getDroppedPackets();
+
+    for (auto packet: droppedPackets)
+        flows[packet.getFlowId() - 1][packet.getPacketOrder()] = packet;
 
     //output to graph python program
     for (int i = 0; i < simulator.numOfFlows(); i++) {

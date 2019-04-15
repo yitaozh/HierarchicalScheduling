@@ -4,6 +4,19 @@
 
 #include "Packet.h"
 
+Packet::Packet() {
+    this->flowId = -1;
+    this->packetOrder = -1;
+    this->arriveCycle = -1;
+    this->departureCycle = -1;
+    this->thryDepartureRound = -1;
+    this->actlDepartureRound = -1;
+    this->size = size;
+    this->insertLevel = -1;
+    this->insertFifo = -1;
+    this->fifoPosition = -1;
+}
+
 Packet::Packet(int flowNum, int packageNum, int arriveCycle,
         int departureRound, int departureCycle, int size){
     this->flowId = flowNum;

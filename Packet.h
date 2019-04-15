@@ -21,6 +21,8 @@ private:
     int fifoPosition;
 
 public:
+    Packet();
+
     Packet(int flowNum, int packageNum, int arriveCycle,
             int departureRound, int departureCycle, int size);
 

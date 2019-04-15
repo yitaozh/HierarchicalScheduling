@@ -22,6 +22,7 @@ private:
     int packetNum;      // current num of packets in sim.
     int dropPacketNum;
     vector<int> packetNumRecord;
+    vector<Packet> droppedPackets;
 
 public:
     Simulator(vector<Flow>, vector<Packet>);
@@ -33,6 +34,7 @@ public:
     int numOfPackets();
     const vector<int> &getPacketNumRecord() const;
     int getDropPacketNum() const;
+    vector<Packet> getDroppedPackets();
 };
 
 

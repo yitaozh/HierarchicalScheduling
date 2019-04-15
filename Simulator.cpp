@@ -79,6 +79,7 @@ Packet Simulator::runCycle() {
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
         if (departureRound == -1) {
             dropPacketNum++;
+            droppedPackets.push_back(packet);
             continue;
         }
         packet.setArriveRound(currentRound);
@@ -115,4 +116,8 @@ const vector<int> &Simulator::getPacketNumRecord() const {
 
 int Simulator::getDropPacketNum() const {
     return dropPacketNum;
+}
+
+vector<Packet> Simulator::getDroppedPackets () {
+    return droppedPackets;
 }
