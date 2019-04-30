@@ -77,14 +77,16 @@ Packet Simulator::runCycle() {
     while (currentPacketIndex < packets.size() && packets[currentPacketIndex].getArriveCycle() <= currentCycle) {
         Packet packet = packets[currentPacketIndex++];
         int departureRound = calDepartureRound(packet.getFlowId() - 1, packet.getSize());
-        if (departureRound == -1) {
+        packet.setArriveRound(currentRound);
+        packet.setThryDepartureRound(departureRound);
+        if (departureRound / 100 - currentRound / 100 >= 10) {
             dropPacketNum++;
             droppedPackets.push_back(packet);
             continue;
         }
-        packet.setArriveRound(currentRound);
-        packet.setThryDepartureRound(departureRound);
+
         int flowId = packet.getFlowId() - 1;
+        flows[flowId].setLastDepartureRound(departureRound);
         int insertLevel = scheduler.push(packet, flows[flowId].getInsertLevel());
         flows[flowId].setInsertLevel(insertLevel);
         packetNum++;
@@ -96,9 +98,6 @@ Packet Simulator::runCycle() {
 int Simulator::calDepartureRound(int flowId, int packetSize) {
     int departureRound = static_cast<int>(ceil(max(currentRound, flows[flowId].getLastDepartureRound())
             + 1 / flows[flowId].getWeight() * packetSize));
-    if (departureRound / 100 - currentRound / 100 >= 10)
-        return -1;
-    flows[flowId].setLastDepartureRound(departureRound);
     return departureRound;
 }
 
