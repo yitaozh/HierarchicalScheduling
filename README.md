@@ -1,6 +1,17 @@
 # HierarchicalScheduling
 
-#### *** NOTE: This branch meets requirement for Scheme 1 where upper level are partially every cycle, and implements dynamic jumping feature. *** 
+#### *** NOTE: This branch meets requirement for Scheme 1 where upper level are partially served every cycle, and implements dynamic jumping feature. *** 
+
+---
+
+### Work Flow
+- input config.txt to trace_generator.py => trace.txt
+- mkdir build => cd build => cmake.. => make
+- put the trace.txt file under in build
+- run "HierarchicalScheduling trace.txt"
+- the results are under the same folder, one simplified and one detailed
+---
+
 
 ### Input: config.txt
 
